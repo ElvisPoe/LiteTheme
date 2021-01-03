@@ -1,0 +1,80 @@
+/*
+ * Global Less
+ *
+*/
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html, body {
+  height: auto;
+  min-height: 100vh;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  box-sizing: border-box;
+}
+
+#bd {
+  overflow-x: hidden;
+}
+
+#bd > *,
+#wrap-body > * {
+  flex-shrink: 0;
+}
+
+button:focus, input:focus, a:focus {
+  outline: none;
+}
+
+a, a:hover, a:focus, a:active {
+  text-decoration: none;
+  transition: .3s;
+  color: black;
+}
+
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+ul {
+  list-style-type: none;
+}
+
+select {
+  border: 0;
+}
+
+.row {
+  width: 100%;
+  margin: auto;
+}
+
+button, input {
+  &:focus, &:hover, &:active {
+    outline: 0;
+    box-shadow: unset;
+  }
+}
+
+.admin-bar #offcanvas {
+  padding-top: 45px;
+}
+
+.woocommerce #respond input#submit.alt, .woocommerce a.button.alt, .woocommerce button.button.alt, .woocommerce input.button.alt {
+  background-color: black;
+  &:hover {
+    background-color: gray;
+  }
+}

@@ -1,0 +1,115 @@
+/*
+Name: CSS - Foodies Online
+Version:  1.0
+*/
+:root {
+    --main-color: #4AA140;
+    --secondary-color: #e52121;
+    --third-color: #727272;
+
+    --bg-color1: #212121;
+    --bg-color2: #F1F3F5;
+    --bg-color3: #EBEBEB;
+
+    --xsmall-font-size : 10px;
+    --small-font-size : 12px;
+    --main-font-size : 16px;
+    --large-font-size : 20px;
+    --header-font-size : 28px;
+}
+@font-face {
+    font-family: Roboto;
+    src: url(../../fonts/Roboto/Roboto-Regular.ttf);
+}
+html {
+    scroll-behavior: smooth;
+}
+button:focus, input:focus, a:focus {
+    outline: none;
+}
+p, a, span, div, input, button {
+    font-family: 'Roboto';
+    font-size: var(--main-font-size);
+    font-weight: 400;
+}
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    transition: .3s;
+    color: black;
+}
+.row {
+    width: 100%;
+    margin: auto;
+}
+/* Header */
+#header .main-header {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+#header #navigation a {
+    font-size: 16px;
+    font-weight: 400;
+    padding: .5rem 3rem .5rem 5px;
+}
+
+#header .menu-item-has-children {
+    position: relative;
+}
+#header .menu-item-has-children:after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f078";
+    display: inline-block;
+    position: absolute;
+    right: 25%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+#header ul.sub-menu {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background: white;
+    list-style: none;
+    width: 250px;
+    padding: 5px 15px;
+    border: 1px solid var(--secondary-color);
+}
+#header .menu-item-has-children:hover ul.sub-menu {
+    display: block;
+}
+
+
+/* Footer Copyright */
+#footer {
+    background: var(--bg-color1);
+    margin-top: auto;
+}
+
+#footer #copyright {
+    background: var(--bg-color1);
+    padding: 10px 0;
+    text-align: center;
+    color: white;
+    border-top: 1px solid #ffffff25;
+}
+
+/* Small devices */
+@media (max-width: 767px) {
+
+}
+
+/* Large Devices */
+@media (min-width: 767px) {
+
+}
+
+/* Medium devices */
+@media (min-width: 767px) and (max-width: 992px) {
+
+}
+/* Large devices */
+@media (min-width: 992px) and (max-width: 1200px) {
+
+}
+/* Extra large devices */
+@media (min-width: 1200px) {}
