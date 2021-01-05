@@ -330,19 +330,15 @@ function greekToSlug($str) {
     return $final;
 }
 
-// REMOVE WP EMOJI
+// REMOVE WP EMOJI STYLES AND SCRIPTS
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');
-
 remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 remove_action( 'admin_print_styles', 'print_emoji_styles' );
 
 
-
-
-
+// Add Less Compile button in admin bar
 add_action( 'admin_bar_menu', 'add_link_to_admin_bar',999 );
-
 function add_link_to_admin_bar($admin_bar) {
     $args = array(
         'id'     => 'less-compile',
@@ -351,4 +347,25 @@ function add_link_to_admin_bar($admin_bar) {
         'meta'   => array('target' => '_blank')
     );
     $admin_bar->add_node( $args );
+}
+
+
+
+// If there is a logo - Show it in Admin Login Page
+if(has_custom_logo()){
+    function custom_wplogin_logo() {
+        $image = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ) , 'full' );
+        ?>
+        <style type='text/css'>
+            #login h1 a, .login h1 a {
+                background-image: url(<?= $image[0] ?>);
+                width: auto;
+                background-size: contain;
+                height: 150px;
+                background-repeat: no-repeat;
+                pointer-events: none;
+            }
+        </style>
+    <?php }
+    add_action( 'login_enqueue_scripts', 'custom_wplogin_logo' );
 }
