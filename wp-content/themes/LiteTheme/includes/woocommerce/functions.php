@@ -97,4 +97,38 @@ if (class_exists('WooCommerce')) {
         add_filter( 'woocommerce_available_variation', 'custom_woocommerce_available_variation' );
         add_action( 'init', 'change_add_to_cart', 10 );
     }
+
+
+
+
+
+    /**
+     * Display the custom price for students and alumni
+     * @since 1.0.0
+     */
+    add_action( 'woocommerce_product_options_general_product_data', 'custom_prices' );
+    function custom_prices() {
+        woocommerce_wp_text_input($args = array(
+            'id' => 'custom_price_students',
+            'label' => __( 'Students Price (€)', 'woocommerce' ),
+            'class' => 'custom_price_students',
+            'value' => get_post_meta(get_the_id(), 'custom_price_students')[0]
+        ));
+        woocommerce_wp_text_input($args = array(
+            'id' => 'custom_price_alumni',
+            'label' => __( 'Alumni Price (€)', 'woocommerce' ),
+            'class' => 'custom_price_alumni',
+            'value' => get_post_meta(get_the_id(), 'custom_price_alumni')[0]
+        ));
+    }
+    add_action('woocommerce_process_product_meta', 'woocommerce_product_custom_fields_save');
+    function woocommerce_product_custom_fields_save( $post_id ){
+
+        $custom_price_students = isset( $_POST['custom_price_students'] ) ? $_POST['custom_price_students'] : '';
+        $custom_price_alumni = isset( $_POST['custom_price_alumni'] ) ? $_POST['custom_price_alumni'] : '';
+
+        update_post_meta( $post_id, 'custom_price_students', sanitize_text_field($custom_price_students));
+        update_post_meta( $post_id, 'custom_price_alumni', sanitize_text_field($custom_price_alumni));
+    }
+
 }
