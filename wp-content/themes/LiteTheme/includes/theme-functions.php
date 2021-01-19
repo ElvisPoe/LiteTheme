@@ -11,9 +11,7 @@ if ( ! defined('DS') ) {
     define('DS', DIRECTORY_SEPARATOR);
 }
 
-// Init Less
-require get_template_directory() . '/includes/less/theless.php';
-
+// Include Core Files
 require get_template_directory() . '/admin/functions.php';
 require get_template_directory() . '/admin/theme-support.php';
 require get_template_directory() . '/admin/woocommerce.php';
@@ -21,6 +19,14 @@ require get_template_directory() . '/includes/woocommerce/functions.php';
 require get_template_directory() . '/includes/widgets.php';
 require get_template_directory() . '/includes/metaboxes.php';
 require get_template_directory() . '/includes/shortcodes.php';
+
+
+// Include Custom Post Types
+require get_template_directory() . '/includes/custom-post-types/benefits.php';
+require get_template_directory() . '/includes/custom-post-types/team.php';
+
+// Include Less
+require get_template_directory() . '/includes/less/theless.php';
 
 if ( ! current_user_can('manage_options') ) {
     show_admin_bar(false);
@@ -305,6 +311,7 @@ function filenameToLatin($filename) {
     return str_replace($path['filename'], sanitize_title($path['filename']), $filename);
 }
 
+
 function greekToSlug($str) {
     $greekChars = array(
         'Α','Β','Γ','Δ','Ε','Ζ','Η','Θ','Ι','Κ','Λ','Μ','Ν','Ξ','Ο','Π','Ρ','Σ','Τ','Υ','Φ','Χ','Ψ','Ω',
@@ -336,7 +343,6 @@ remove_action('wp_print_styles', 'print_emoji_styles');
 remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 remove_action( 'admin_print_styles', 'print_emoji_styles' );
 
-
 // Add Less Compile button in admin bar
 add_action( 'admin_bar_menu', 'add_link_to_admin_bar',999 );
 function add_link_to_admin_bar($admin_bar) {
@@ -348,8 +354,6 @@ function add_link_to_admin_bar($admin_bar) {
     );
     $admin_bar->add_node( $args );
 }
-
-
 
 // If there is a logo - Show it in Admin Login Page
 if(has_custom_logo()){
