@@ -2,24 +2,9 @@
 
 <?php show_admin_bar(true); ?>
 
-<div class="header-top container-fluid text-center">
-    <div>
-        FREE SHIPPING
-    </div>
-</div>
 <header id="header" role="banner" class="<?php echo (get_option('sticky_menu') == 1) ? 'sticky-top' : ''; ?>">
     <div class="<?php echo container_width('header') ?> main-header">
         <div class="header-columns row">
-
-            <div class="col-6 col-md-3 logo-col">
-                <div id="logo">
-                    <?php if ( has_custom_logo() ) :
-                        the_custom_logo();
-                    else :
-                        echo '<h1><a href="' . get_bloginfo('wpurl') . '">' . get_bloginfo('name') . '</a></h1>';
-                    endif; ?>
-                </div>
-            </div>
 
             <div class="col-6 col-md-9">
                 <button type="button" class="navbar-toggler-open d-md-none menu-btn-col"
@@ -33,6 +18,17 @@
                     ?>
                 </nav>
             </div>
+
+            <div class="col-6 col-md-3 logo-col">
+                <div id="logo">
+                    <?php if ( has_custom_logo() ) :
+                        the_custom_logo();
+                    else :
+                        echo '<h1><a href="' . get_bloginfo('wpurl') . '">' . get_bloginfo('name') . '</a></h1>';
+                    endif; ?>
+                </div>
+            </div>
+
         </div>
     </div>
 </header>

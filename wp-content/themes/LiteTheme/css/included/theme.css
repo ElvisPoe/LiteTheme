@@ -30,6 +30,10 @@ html, body {
 }
 
 /* MOBILE FIRST STRUCTURE */
+header#header {
+    background: white;
+}
+
 #wrap-body {
     width: 100%;
     height: 100%;

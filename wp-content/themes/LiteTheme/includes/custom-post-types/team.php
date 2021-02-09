@@ -32,6 +32,19 @@ function team_post_type() {
 
 
 /*
+ * Set the custom fields for this post
+ * Label is shown in admin above field.
+ * Slug is the post meta
+ *
+ * */
+CONST customPostTypeFields = array(
+    ['label' => 'Phone Number', 'slug' => 'team_member_phone', 'type' => 'text'],
+    ['label' => 'Company', 'slug' => 'team_member_company', 'type' => 'text'],
+    ['label' => 'Company URL', 'slug' => 'team_member_company_url', 'type' => 'text'],
+    ['label' => 'Company URL 2', 'slug' => 'team_member_company_url_2', 'type' => 'text'],
+);
+
+/*
  *
  * Custom Field for Team Member
  *
@@ -64,14 +77,11 @@ function team_member_data_function( $post ) {
      * Use get_post_meta() to retrieve an existing value
      * from the database and use the value for the form.
      */
-    $value_team_member_phone = get_post_meta( $post->ID, 'team_member_phone', true );
-    $value_team_member_company = get_post_meta( $post->ID, 'team_member_company', true );
-
-    echo "<label for='member_phone'>Phone Number</label>";
-    echo '<input type="text" id="team_member_phone" name="team_member_phone" value="' . esc_attr( $value_team_member_phone ) . '" style="width: 100%" />';
-
-    echo "<label for='member_company'>Company</label>";
-    echo '<input type="text" id="team_member_company" name="team_member_company" value="' . esc_attr( $value_team_member_company ) . '" style="width: 100%" />';
+    foreach (customPostTypeFields as $customPostTypeField) {
+        echo "<label for='member_phone'>" . $customPostTypeField['label'] . "</label>";
+        echo "<input type='". $customPostTypeField['type'] ."' id='". $customPostTypeField['slug'] ."' name='". $customPostTypeField['slug'] ."' 
+        value='" . esc_attr( get_post_meta( $post->ID, $customPostTypeField['slug'], true )) . "' style='width: 100%' />";
+    }
 }
 
 /**
@@ -100,13 +110,10 @@ function member_save_meta_box_data( $post_id ) {
         }
     }
 
-    if ( ! isset( $_POST['team_member_phone'] ) ) {
-        return;
+    foreach (customPostTypeFields as $customPostTypeField) {
+        if ( ! isset( $_POST[$customPostTypeField['slug']] ) ) {
+            return;
+        }
+        update_post_meta( $post_id, $customPostTypeField['slug'], sanitize_text_field( $_POST[$customPostTypeField['slug']] ) );
     }
-    if ( ! isset( $_POST['team_member_company'] ) ) {
-        return;
-    }
-
-    update_post_meta( $post_id, 'team_member_phone', sanitize_text_field( $_POST['team_member_phone'] ) );
-    update_post_meta( $post_id, 'team_member_company', sanitize_text_field( $_POST['team_member_company'] ) );
 }
